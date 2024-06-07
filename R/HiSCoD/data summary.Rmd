@@ -1,0 +1,141 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+
+
+
+
+
+
+```{r}
+summary(data$id)
+```
+21k data
+
+
+
+
+```{r}
+summary(data$year)
+summary(data$month_num)
+summary(data$day)
+```
+most to days, good.
+
+
+
+```{r}
+
+number_parti <- data$nb_participants
+number_parti_modi <- as.numeric(number_parti)
+
+summary(number_parti_modi)
+```
+16000NA, mean 237, med 24, Q3 108.
+
+
+```{r}
+women_parti <-data$women_participation
+
+
+women_parti_modi <- ifelse(women_parti == "No", 0, women_parti)
+women_parti_modi <- ifelse(women_parti_modi == "Yes", 1, women_parti_modi)
+women_parti_modi <- as.numeric(women_parti_modi)
+
+summary(women_parti_modi)
+```
+11335NA, more than half yes
+
+
+```{r}
+city_code <- data$city_code
+city_code <- as.numeric(city_code)
+city_code_new <- data$code_insee_pre_2016
+city_code_new <- as.numeric(city_code_new)
+
+summary(city_code)
+summary(city_code_new)
+
+```
+4068 no city code   and 6809 for code of insee
+city code have some E123456   but not for insee code
+
+
+```{r}
+summary(data$city_latitude)
+summary(data$city_longitude)
+```
+5dp and 6dp
+203 no location, and seems like location is the same with same city code?
+but question here
+
+```{r}
+summary(data$geo_precision)
+```
+what's that means?
+
+
+
+```{r}
+length(table(data$city_latitude))
+length(table(data$city_code))
+
+```
+
+
+
+```{r}
+table(data$country_name)
+length(table(data$country_name))
+```
+15813 France, 3423 England, and other, 20 blank
+
+```{r}
+table(data$admin_level_1_type)
+table(data$admin_level_2_type)
+```
+seems like not useful and no information(region and department)
+
+
+
+
+```{r}
+table(data$historical_political_entity)
+```
+better than above, 10000+France, 2650 GB, and other(like so many France)
+
+```{r}
+table(data$historical_admin_level_1_type)
+table(data$historical_admin_level_2_type)
+```
+good things to know, but not really understand.
+share some same type, but level2 have more blanks(6k 2k) and less information
+
+
+
+
+
+
+
+
+
+
+
+
+
